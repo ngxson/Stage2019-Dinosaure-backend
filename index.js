@@ -29,8 +29,10 @@ mongoose.connection
   .once('open', () => console.log('Connected to MongoDB'))
   .on('error', (err) => console.error(err));
 
-app.get('*', function(req, res){
-  res.redirect('/');
+app.get('*', function(req, res) {
+  fs.readFile(path.join(__dirname, 'views', 'index.html'), 'utf-8', (err, file) => {
+    res.send(file);
+  });
 })
 
 app.listen(port, () => {

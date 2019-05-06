@@ -29,6 +29,10 @@ mongoose.connection
   .once('open', () => console.log('Connected to MongoDB'))
   .on('error', (err) => console.error(err));
 
+app.get('*', function(req, res){
+  res.redirect('/');
+})
+
 app.listen(port, () => {
   console.log('Listening on port ' + port);
 });

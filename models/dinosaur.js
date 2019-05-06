@@ -17,10 +17,7 @@ const dinosaurSchema = new mongoose.Schema({
   name: String,
   age: Number,
   family: String,
-  race: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Race'
-  },
+  race: String,
   food: String
 });
 

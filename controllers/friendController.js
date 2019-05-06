@@ -14,6 +14,8 @@ module.exports.add = async (req, res) => {
   const { dinosaurId } = req;
   const { friendId } = req.body;
   try {
+    const friend = await Friend.findOne({ me: dinosaurId, friend: friendId });
+    if (friend) return res.json({ error: 'You have already added this friend' });
     await Friend.create({ me: dinosaurId, friend: friendId });
     res.json({ success: true });
   } catch (e) {
@@ -23,7 +25,7 @@ module.exports.add = async (req, res) => {
 
 module.exports.delete = async (req, res) => {
   const { dinosaurId } = req;
-  const { friendId } = req.body;
+  const { friendId } = req.query;
   try {
     await Friend.deleteOne({ me: dinosaurId, friend: friendId });
     res.json({ success: true });

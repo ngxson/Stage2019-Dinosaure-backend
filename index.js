@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const compression = require('compression');
 const mongoose = require('mongoose');
+const fs = require("fs");
 
 const routes = require('./controllers/routes');
 const port = process.env.PORT || 5000;
@@ -18,7 +19,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/api/', routes);
-// app.use(express.static(path.join(__dirname, 'views'), { index: false }));
+if (fs.existsSync(path.join(__dirname, 'views'))) {
+  app.use(express.static(path.join(__dirname, 'views'), { index: false }));
+}
 
 // init connect to database
 mongoose.connect(config.mongoDbUri, { useNewUrlParser: true, useCreateIndex: true });

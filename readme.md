@@ -9,5 +9,6 @@
 ## Install
 
 - Make a copy of "config-template.js" and name it "config.js"
-- Customize the file
+- Customize "config.js"
+- Copy pre-built frontend files to "views" folder
 - Run `node .`

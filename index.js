@@ -1,10 +1,12 @@
 'use strict';
 
+const config = require('./config');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const compression = require('compression');
+const mongoose = require('mongoose');
 
 const app = express();
 app.use(cors());
@@ -13,3 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'views'), { index: false }));
+
+// init connect to database
+mongoose.connect(config.mongoDbUri, { useNewUrlParser: true, useCreateIndex: true });
+mongoose.connection
+    .once('open', () => console.log('Connected to MongoDB'))
+    .on('error', (err) => console.error(err));

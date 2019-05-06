@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/api/', routes);
 if (fs.existsSync(path.join(__dirname, 'views'))) {
-  app.use(express.static(path.join(__dirname, 'views'), { index: false }));
+  app.use(express.static(path.join(__dirname, 'views')));
 }
 
 // init connect to database
